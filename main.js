@@ -18,22 +18,26 @@ var makeChart = function() {
     // Update
     var p = d3.select("body")
         .selectAll("span")
-        .data(data)
-        .text(function(d) {
-            return "I'm number " + d + "!";
-        });
+        .data(data, function(d) {
+            return d;
+        }) // need the key function to know which elements to remove, otherwise the last element will get removed
+        //NOTE: we don't need the text below anymore since it is set in enter
+        // .text(function(d) {
+        //     return "I'm number " + d + "!";
+        // });
 
     // Enter
     p.enter().append("span")
         .text(function(d) {
-            return "**NEW**" + d + "**NEW**!";
+            // return "**NEW**" + d + "**NEW**!";
+            return d;
         });
 
     // Exit
     p.exit().remove();
 }
 
-var count = 0;
+var count = 100;
 
 document.getElementById("add-button").addEventListener("click", function() {
     // document.getElementsByTagName("body")[0].append(document.createElement("p"));
@@ -41,13 +45,14 @@ document.getElementById("add-button").addEventListener("click", function() {
     var newPoint = count++;
     // console.log(newPoint);
     data.push(newPoint);
-    // console.log(data);
+    console.log(data);
     makeChart();
 });
 
 document.getElementById("remove-button").addEventListener("click", function() {
     // remove first point
     data.splice(0, 1);
+    console.log(data);
     makeChart();
 });
 
