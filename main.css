@@ -1,0 +1,8 @@
+body {
+    background: palegreen;
+}
+
+span {
+    border: 1px solid blue;
+    background-color: paleturquoise;
+}
